@@ -1,0 +1,32 @@
+// Timejam
+// Remote controlled 433MHz Jammer with adjustable Timer
+// For capturing Rolling Codes with a Hackrf Portapack
+// Arduino Mega is used with a Digispark
+// Arduino Mega connect GPIO 51 to Signal pin on a 433MHz Reciever Module
+// Connect GPIO 53 to Digispark 5v
+// Connect Digispark GPIO 1 to 5v 5x433MHz Transmitter Modules with their Positive pins join to their Signal pin to create Jammer
+// GND to Arduino Mega GND ( Do not connect 5v Digispark to Arduino Mega, power comes from GPIO 53
+
+// DigisparkJammerTimer code ( void setup () { pinMode(1, OUTPUT); digitalWrite(1, HIGH); delay (30000); digitalWrite(1, LOW); } void loop () {}
+
+// Timejame code for Arduino Mega
+
+void setup() {
+Serial.begin(9600);
+pinMode(51, INPUT);
+pinMode(53, OUTPUT);
+}
+
+void loop ()
+{
+int Remote =digitalRead(51);
+if (Remote) {
+Serial.println("                                                  Remote Control detected , Timejam activated ....");
+digitalWrite(53, HIGH);
+delay (45000);
+} else {
+Serial.println(" === nothing detected ..");
+digitalWrite(53, LOW);
+}
+delay (260);
+}
